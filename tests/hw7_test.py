@@ -1,3 +1,4 @@
+import nltk
 from smoothed_ngrams import fit_ngram_model
 from lexical_uniformity import lexical_uniformity
 from odd_one_out import odd_one_out
@@ -14,6 +15,8 @@ def test_lexical_uniformity():
     assert uniformity == 1.5
 
 def test_smoothed_ngrams_defaults():
+    nltk.download('gutenberg')
+    nltk.download('punkt_tab')
     training_data = gutenberg.sents('melville-moby_dick.txt')
     test_sents = [
         ["Queequeg", "loves", "salt", "."],
@@ -26,6 +29,8 @@ def test_smoothed_ngrams_defaults():
     assert model.perplexity(test_grams_list[1]) == approx(48.29138290283018)
 
 def test_smoothed_ngrams_trigram():
+    nltk.download('gutenberg')
+    nltk.download('punkt_tab')
     training_data = gutenberg.sents('melville-moby_dick.txt')
     test_sents = [
         ["Queequeg", "loves", "salt", "."],
@@ -38,6 +43,8 @@ def test_smoothed_ngrams_trigram():
     assert model.perplexity(test_grams_list[1]) == approx(17.260634264039922)
 
 def test_smoothed_ngrams_smoothed_bigram():
+    nltk.download('gutenberg')
+    nltk.download('punkt_tab')
     training_data = gutenberg.sents('melville-moby_dick.txt')
     test_sents = [
         ["Queequeg", "loves", "salt", "."],
@@ -50,6 +57,8 @@ def test_smoothed_ngrams_smoothed_bigram():
     assert model.perplexity(test_grams_list[1]) == approx(159.99056335551376)
 
 def test_smoothed_ngrams_smoothed_trigram():
+    nltk.download('gutenberg')
+    nltk.download('punkt_tab')
     training_data = gutenberg.sents('melville-moby_dick.txt')
     test_sents = [
         ["Queequeg", "loves", "salt", "."],
@@ -62,6 +71,7 @@ def test_smoothed_ngrams_smoothed_trigram():
     assert model.perplexity(test_grams_list[1]) == approx(113.28791415497945)
 
 def test_odd_one_out():
+    nltk.download('wordnet')
     right = wn.synset('right_whale.n.01')
     orca = wn.synset('orca.n.01')
     minke = wn.synset('minke_whale.n.01')
